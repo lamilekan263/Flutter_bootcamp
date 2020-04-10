@@ -25,18 +25,15 @@ class _BmiScreenState extends State<BmiScreen> {
                 Expanded(
                   child: BmiChild(
                     color: bmiChildColor,
-                    cardChild: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Icon(FontAwesomeIcons.mars,size:80.0),
-                        Text('Male'),
-                        
-                      ],
-                    ),
+                    cardChild:
+                        SingleWidget(icon: FontAwesomeIcons.mars, text: 'Male'),
                   ),
                 ),
                 Expanded(
-                  child: BmiChild(color: bmiChildColor),
+                  child: BmiChild(
+                    color: bmiChildColor,
+                    cardChild: SingleWidget(icon: FontAwesomeIcons.moon, text: 'Female'),
+                  ),
                 ),
               ],
             ),
@@ -62,5 +59,26 @@ class _BmiScreenState extends State<BmiScreen> {
   }
 }
 
+class SingleWidget extends StatelessWidget {
+  SingleWidget({this.text, this.icon});
 
+  final IconData icon;
 
+  final String text;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: <Widget>[
+        Icon(icon, size: 80.0),
+        SizedBox(
+          height: 15.0,
+        ),
+        Text(
+          text,
+          style: TextStyle(fontSize: 20.0),
+        ),
+      ],
+    );
+  }
+}
