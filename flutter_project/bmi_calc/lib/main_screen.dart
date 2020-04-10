@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'bmi_child.dart';
-// import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
+const bmiChildColor = Color(0xFF1D1E33);
 
 class BmiScreen extends StatefulWidget {
   @override
@@ -21,25 +23,35 @@ class _BmiScreenState extends State<BmiScreen> {
             child: Row(
               children: <Widget>[
                 Expanded(
-                  child: BmiChild(),
+                  child: BmiChild(
+                    color: bmiChildColor,
+                    cardChild: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Icon(FontAwesomeIcons.mars,size:80.0),
+                        Text('Male'),
+                        
+                      ],
+                    ),
+                  ),
                 ),
                 Expanded(
-                  child: BmiChild(),
+                  child: BmiChild(color: bmiChildColor),
                 ),
               ],
             ),
           ),
           Expanded(
-            child: BmiChild(),
+            child: BmiChild(color: bmiChildColor),
           ),
           Expanded(
             child: Row(
               children: <Widget>[
                 Expanded(
-                  child: BmiChild(),
+                  child: BmiChild(color: bmiChildColor),
                 ),
                 Expanded(
-                  child: BmiChild(),
+                  child: BmiChild(color: bmiChildColor),
                 ),
               ],
             ),
@@ -49,4 +61,6 @@ class _BmiScreenState extends State<BmiScreen> {
     );
   }
 }
+
+
 
