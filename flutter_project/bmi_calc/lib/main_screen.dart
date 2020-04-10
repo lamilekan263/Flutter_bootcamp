@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'bmi_child.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'sing.dart';
 
 const bmiChildColor = Color(0xFF1D1E33);
 
@@ -33,6 +34,7 @@ class _BmiScreenState extends State<BmiScreen> {
                   child: BmiChild(
                     color: bmiChildColor,
                     cardChild: SingleWidget(icon: FontAwesomeIcons.moon, text: 'Female'),
+                    
                   ),
                 ),
               ],
@@ -59,26 +61,3 @@ class _BmiScreenState extends State<BmiScreen> {
   }
 }
 
-class SingleWidget extends StatelessWidget {
-  SingleWidget({this.text, this.icon});
-
-  final IconData icon;
-
-  final String text;
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        Icon(icon, size: 80.0),
-        SizedBox(
-          height: 15.0,
-        ),
-        Text(
-          text,
-          style: TextStyle(fontSize: 20.0),
-        ),
-      ],
-    );
-  }
-}
