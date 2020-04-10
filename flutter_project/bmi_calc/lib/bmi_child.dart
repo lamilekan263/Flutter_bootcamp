@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-
-
 class BmiChild extends StatelessWidget {
   final Color color;
   final Widget cardChild;
