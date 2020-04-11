@@ -3,11 +3,16 @@ import 'bmi_child.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'sing.dart';
 
-
 const bottomContainerHeight = 80.0;
 const activeColor = Color(0xFF1D1E33);
 const inActiveColor = Color(0xFF111328);
 const bottomContainerColor = Colors.pink;
+
+//created a gender enum
+enum Gender {
+  male,
+  female,
+}
 
 class BmiScreen extends StatefulWidget {
   @override
@@ -15,34 +20,14 @@ class BmiScreen extends StatefulWidget {
 }
 
 class _BmiScreenState extends State<BmiScreen> {
-  Color maleCardColor = inActiveColor;
-  Color femaleCardColor = inActiveColor;
+  Gender selectedGender;
 
-  // create a function that sets the state of each card color when tapped
-
-  void getCardColor(int gender){
-    if(gender == 1){
-      if(maleCardColor == inActiveColor ){
-        maleCardColor = activeColor;
-      }else{
-        maleCardColor = inActiveColor;
-      }
-    }
-    if(gender == 2){
-      if(femaleCardColor == inActiveColor ){
-        femaleCardColor = activeColor;
-      }else{
-        femaleCardColor = inActiveColor;
-      }
-    }
-  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('BMI Calculator'),
         centerTitle: true,
-        
       ),
       body: Column(
         children: <Widget>[
@@ -52,12 +37,14 @@ class _BmiScreenState extends State<BmiScreen> {
                 Expanded(
                   child: GestureDetector(
                     onTap: () {
-                      setState((){
-                        getCardColor(1);
+                      setState(() {
+                        selectedGender = Gender.male;
                       });
                     },
                     child: BmiChild(
-                      color: maleCardColor,
+                      color: selectedGender == Gender.male
+                          ? activeColor
+                          : inActiveColor,
                       cardChild: SingleWidget(
                           icon: FontAwesomeIcons.mars, text: 'Male'),
                     ),
@@ -66,12 +53,14 @@ class _BmiScreenState extends State<BmiScreen> {
                 Expanded(
                   child: GestureDetector(
                     onTap: () {
-                      setState((){
-                        getCardColor(2);
+                      setState(() {
+                        selectedGender = Gender.female;
                       });
                     },
                     child: BmiChild(
-                      color: femaleCardColor,
+                      color: selectedGender == Gender.female
+                          ? activeColor
+                          : inActiveColor,
                       cardChild: SingleWidget(
                         icon: FontAwesomeIcons.venus,
                         text: 'Female',
@@ -83,7 +72,12 @@ class _BmiScreenState extends State<BmiScreen> {
             ),
           ),
           Expanded(
-            child: BmiChild(color: activeColor),
+            child: BmiChild(
+              color: activeColor,
+              cardChild: Row(
+                children: <Widget>[Text('Height')],
+              ),
+            ),
           ),
           Expanded(
             child: Row(
