@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'bmi_child.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'sing.dart';
+import 'roundbutton.dart'; 
+import 'result_page.dart';
 
 const bottomContainerHeight = 80.0;
 const activeColor = Color(0xFF1D1E33);
@@ -13,6 +15,9 @@ enum Gender {
   male,
   female,
 }
+int height = 180;
+int age = 20;
+int weight = 60;
 
 class BmiScreen extends StatefulWidget {
   @override
@@ -74,8 +79,48 @@ class _BmiScreenState extends State<BmiScreen> {
           Expanded(
             child: BmiChild(
               color: activeColor,
-              cardChild: Row(
-                children: <Widget>[Text('Height')],
+              cardChild: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Text('Height'),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.baseline,
+                    textBaseline: TextBaseline.alphabetic,
+                    children: <Widget>[
+                      Text(
+                        height.toString(),
+                        style: TextStyle(
+                          fontSize: 35.0,
+                        ),
+                      ),
+                      Text('Cm'),
+                    ],
+                  ),
+                  SliderTheme(
+                    data: SliderTheme.of(context).copyWith(
+                      activeTrackColor: Colors.white,
+                      thumbColor: Color(0XFFEB1555),
+                      overlayColor: Color(0X29EB1555),
+                      thumbShape:
+                          RoundSliderThumbShape(enabledThumbRadius: 15.0),
+                      overlayShape:
+                          RoundSliderOverlayShape(overlayRadius: 30.0),
+                    ),
+                    child: Slider(
+                      value: height.toDouble(),
+                      max: 220.0,
+                      min: 120.0,
+                      activeColor: Color(0XFFEB1555),
+                      inactiveColor: Color(0XFF8D8E98),
+                      onChanged: (double newValue) {
+                        setState(() {
+                          height = newValue.round();
+                        });
+                      },
+                    ),
+                  ),
+                ],
               ),
             ),
           ),
@@ -83,20 +128,103 @@ class _BmiScreenState extends State<BmiScreen> {
             child: Row(
               children: <Widget>[
                 Expanded(
-                  child: BmiChild(color: activeColor),
+                  child: BmiChild(
+                    color: activeColor,
+                    cardChild: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Text(
+                          'Weight',
+                        ),
+                        Text(
+                          weight.toString(),
+                          style: TextStyle(
+                            fontSize: 35.0,
+                          ),
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            RoundIconButton(
+                              icon: FontAwesomeIcons.minus,
+                              onPressed: () {
+                                setState((){
+                                    weight--;
+                                  });
+                              },
+                            ),
+                            SizedBox(
+                              width: 10.0,
+                            ),
+                            RoundIconButton(
+                                icon: FontAwesomeIcons.plus,
+                                onPressed: () {
+                                  setState((){
+                                    weight++;
+                                  });
+                                }),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
                 Expanded(
-                  child: BmiChild(color: activeColor),
+                  child: BmiChild(
+                    color: activeColor,
+                    cardChild:  Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Text(
+                          'Age',
+                        ),
+                        Text(
+                          age.toString(),
+                          style: TextStyle(
+                            fontSize: 35.0,
+                          ),
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            RoundIconButton(
+                              icon: FontAwesomeIcons.minus,
+                              onPressed: () {
+                                setState((){
+                                    age--;
+                                  });
+                              },
+                            ),
+                            SizedBox(
+                              width: 10.0,
+                            ),
+                            RoundIconButton(
+                                icon: FontAwesomeIcons.plus,
+                                onPressed: () {
+                                  setState((){
+                                    age++;
+                                  });
+                                }),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
               ],
             ),
           ),
-          Container(
-            width: double.infinity,
-            height: bottomContainerHeight,
-            margin: EdgeInsets.only(top: 20.0),
-            decoration: BoxDecoration(
-              color: bottomContainerColor,
+          GestureDetector(
+            onTap: (){
+              Navigator.push(context, MaterialPageRoute(builder: (context) => ResultPage()));
+          };
+                child: Container(
+              width: double.infinity,
+              height: bottomContainerHeight,
+              margin: EdgeInsets.only(top: 15.0),
+              decoration: BoxDecoration(
+                color: bottomContainerColor,
+              ),
             ),
           )
         ],
@@ -104,3 +232,4 @@ class _BmiScreenState extends State<BmiScreen> {
     );
   }
 }
+
