@@ -3,7 +3,13 @@ import '../components/bmi_child.dart';
 import 'package:bmi_calc/konstant.dart';
 import '../components/buttom_botton.dart';
 
+
 class ResultPage extends StatelessWidget {
+  ResultPage({@required this.bmiResult,@required this.resultText, @required this.interpretation});
+  final String bmiResult;
+  final String resultText;
+  final String interpretation;
+ 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,7 +39,9 @@ class ResultPage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
-                  Text('Normal', style:resultTextStyle),
+                  Text(resultText.toUpperCase(), style:resultTextStyle),
+                  Text(bmiResult, style:kBMITextStyle),
+                  Text(interpretation, style:kBodyStyle, textAlign: TextAlign.center,),
                 ],
               ),
             ),
