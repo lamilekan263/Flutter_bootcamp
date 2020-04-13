@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
-import 'bmi_child.dart';
+import '../components/bmi_child.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'sing.dart';
-import 'roundbutton.dart'; 
-import 'result_page.dart';
+import '../components/sing.dart';
+import '../components/roundbutton.dart';
+import '../components/buttom_botton.dart';
+import 'package:bmi_calc/konstant.dart';
+import '../screens/result_page.dart';
 
-const bottomContainerHeight = 80.0;
-const activeColor = Color(0xFF1D1E33);
-const inActiveColor = Color(0xFF111328);
-const bottomContainerColor = Colors.pink;
+
 
 //created a gender enum
 enum Gender {
@@ -148,9 +147,9 @@ class _BmiScreenState extends State<BmiScreen> {
                             RoundIconButton(
                               icon: FontAwesomeIcons.minus,
                               onPressed: () {
-                                setState((){
-                                    weight--;
-                                  });
+                                setState(() {
+                                  weight--;
+                                });
                               },
                             ),
                             SizedBox(
@@ -159,7 +158,7 @@ class _BmiScreenState extends State<BmiScreen> {
                             RoundIconButton(
                                 icon: FontAwesomeIcons.plus,
                                 onPressed: () {
-                                  setState((){
+                                  setState(() {
                                     weight++;
                                   });
                                 }),
@@ -172,7 +171,7 @@ class _BmiScreenState extends State<BmiScreen> {
                 Expanded(
                   child: BmiChild(
                     color: activeColor,
-                    cardChild:  Column(
+                    cardChild: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         Text(
@@ -190,9 +189,9 @@ class _BmiScreenState extends State<BmiScreen> {
                             RoundIconButton(
                               icon: FontAwesomeIcons.minus,
                               onPressed: () {
-                                setState((){
-                                    age--;
-                                  });
+                                setState(() {
+                                  age--;
+                                });
                               },
                             ),
                             SizedBox(
@@ -201,7 +200,7 @@ class _BmiScreenState extends State<BmiScreen> {
                             RoundIconButton(
                                 icon: FontAwesomeIcons.plus,
                                 onPressed: () {
-                                  setState((){
+                                  setState(() {
                                     age++;
                                   });
                                 }),
@@ -214,22 +213,14 @@ class _BmiScreenState extends State<BmiScreen> {
               ],
             ),
           ),
-          GestureDetector(
-            onTap: (){
-              Navigator.push(context, MaterialPageRoute(builder: (context) => ResultPage()));
-          };
-                child: Container(
-              width: double.infinity,
-              height: bottomContainerHeight,
-              margin: EdgeInsets.only(top: 15.0),
-              decoration: BoxDecoration(
-                color: bottomContainerColor,
-              ),
-            ),
-          )
+          ButtomButton(text: 'Calculate', onTap:(){
+             Navigator.push(context,
+            MaterialPageRoute(builder: (context) => ResultPage()));
+          }),
         ],
       ),
     );
   }
 }
+
 
